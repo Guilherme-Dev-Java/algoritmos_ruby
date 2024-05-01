@@ -10,11 +10,11 @@ def pesquisa_binaria (array, elemento)
         if elemento == array[media]
             return puts "O elemento #{elemento} esta na posição #{media}" 
 
-        elsif (array[media] > elemento) 
-            inicio = media + 1
+        elsif array[media] > elemento
+            fim =  media - 1
             
         else
-            fim = media - 1
+        inicio = media + 1
             
         end
 
@@ -29,9 +29,11 @@ contador = 0
 array = []
 
 while (contador < array_size)
-    numero = rand(1000)
-    array << numero
-    contador +=1
+    numero = rand(100)
+    if !array.include?(numero)
+        array << numero
+        contador +=1
+    end
 end
 
 array_ordenado = array.sort
@@ -40,7 +42,7 @@ array_ordenado = array.sort
  puts "Digite o elemento que quer buscar: "
  elemento = gets.to_i
  puts pesquisa_binaria(array_ordenado, elemento)
- p array
+ p array_ordenado
 
 
 
