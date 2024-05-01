@@ -3,36 +3,32 @@ def pesquisa_binaria (array, elemento)
     inicio = 0
     fim = array.length-1
     
-    while inicio <= fim
+    while (inicio <= fim)
 
         media = (inicio + fim)/2
     
         if elemento == array[media]
-            return media    
+            return puts "O elemento #{elemento} esta na posição #{media}" 
 
-        elsif elemento < array[media]
+        elsif (array[media] > elemento) 
             inicio = media + 1
-
-        else elemento > array[media]
+            
+        else
             fim = media - 1
+            
         end
 
     end
    
-    return nil
+    return "Elemento não encontrado"
 
 end
 
 array = [1, 3, 4, 10, 40]
 puts "Digite o elemento que quer buscar: "
 elemento = gets.to_i
-resultado = pesquisa_binaria(array, elemento)
+puts pesquisa_binaria(array, elemento)
 
-if resultado
-    puts "Elemento #{elemento} encontrado no indice #{resultado}."
-else
-    puts "Elemento #{elemento} não encontrado no array."
-end
 
 
 
