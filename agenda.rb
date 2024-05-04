@@ -20,19 +20,36 @@ def adicionar_contato
     @agenda << {:nome => nome, :telefone => telefone}
 end
 
-def buscar_contato
-    print "Qual o nome do contato deseja buscar: "
-        nome = gets.chomp
-
-     @agenda.each do |contato|
-        if contato[:nome].downcase.include?(nome.downcase)
-            puts "#{contato[:nome]} - #{contato[:telefone]}"
+def buscar_contato(nome)
+         contato_encontrado = @agenda.find {|contato| contato[:nome] == nome}
+            
+        if contato_encontrado
+            puts "#{contato_encontrado[:nome]} - #{contato_encontrado[:telefone]}"
         else
-            puts "Não tem nenhum contato com esse nome." 
+            puts "Contato não encontrado." 
         end  
-    end
-
+        puts "---------------------------"
 end
+
+def editar_contato(nome)
+   
+    @agenda.each do |contato|
+        if contato[:nome].downcase == (nome.downcase)
+            print "Deseja Alterar o nome: (para manter o nome aperte enter)"
+            nome_salvo = contato[:nome]
+            
+            contato[:nome]= gets.chomp
+            contato[:nome]= contato[:nome].empty? ? nome_salvo : contato[:nome]
+            
+            print "Deseja Alterar o telefone: (para manter o telefone aperte enter)"
+            telefone_salvo = contato[:telefone]
+            
+            contato[:telefone]= gets.chomp
+            contato[:telefone]= contato[:telefone].empty? ? telefone_salvo : contato[:telefone]
+        end
+    end
+end
+
 
 loop do
    
@@ -40,15 +57,21 @@ loop do
     opcao = gets.chomp.to_i 
 
     case
-    when opcao == 0
-        puts "Até Logo!"
+        when opcao == 0
+            puts "Até Logo!"
         break
-    when opcao == 1
-        all_contacts
-    when opcao == 2
-        adicionar_contato
-    when opção == 3
-        buscar_contato
+        when opcao == 1
+            all_contacts
+        when opcao == 2
+            adicionar_contato
+        when opcao == 3
+            print "Qual o nome do contato deseja buscar: "
+            nome = gets.chomp
+            buscar_contato(nome)
+        when opcao == 4
+            print "Qual Contato deseja editar: "
+            nome = gets.chomp
+            editar_contato(nome)
     end
     
 end
