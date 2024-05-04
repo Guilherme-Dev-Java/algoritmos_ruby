@@ -50,6 +50,15 @@ def editar_contato(nome)
     end
 end
 
+def remover_contato(nome)
+    excluido = @agenda.reject! {|contato| contato[:nome].upcase == nome.upcase}
+    if excluido
+        puts "Contato removido com sucesso!"
+    else
+        puts "Contato não encontrado."
+    end
+
+end
 
 loop do
    
@@ -72,6 +81,13 @@ loop do
             print "Qual Contato deseja editar: "
             nome = gets.chomp
             editar_contato(nome)
+        when opcao == 5
+            print "Qual Contato deseja remover: "
+            nome = gets.chomp
+            remover_contato(nome)
+        else
+            puts "Opção inválida!"
+
     end
     
 end
