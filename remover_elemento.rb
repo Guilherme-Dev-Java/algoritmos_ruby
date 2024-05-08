@@ -1,19 +1,13 @@
 def remove_elemento (nums, val)
-    k = 0
+    
+    nums.select! {|numero| numero !=val}
+    return nums.length
 
-    nums.each do |valor|
-        valor_teste = valor
-        if (valor_teste == val)
-            nums.delete(valor_teste)
-        end
-        k +=1
-    end
-    return k
 end
 
 
 
-nums = [0,1,2,2,3,0,4,2]
-val = 2
+nums = [1]
+val = 1
 
 puts remove_elemento(nums, val)
